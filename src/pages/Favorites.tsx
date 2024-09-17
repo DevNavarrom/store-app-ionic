@@ -1,7 +1,12 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
+import ProductList from '../components/ProductList';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 const Favorites: React.FC = () => {
+
+    const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
 
     return (
         <IonPage>
@@ -10,8 +15,8 @@ const Favorites: React.FC = () => {
                     <IonTitle>Favorites</IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <IonContent className="ion-padding">
-                UI goes here...
+            <IonContent fullscreen>
+                <ProductList products={wishlistItems} />
             </IonContent>
         </IonPage>
     );

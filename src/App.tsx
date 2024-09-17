@@ -1,8 +1,8 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
+  IonBadge,
   IonIcon,
-  IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -46,47 +46,54 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './main.css';
+
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 setupIonicReact();
 
 const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route exact path="/favorites">
-            <Favorites />
-          </Route>
-          <Route exact path="/cart">
-            <Cart />
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/home">
-            <IonIcon aria-hidden="true" icon={homeOutline} />
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/favorites">
-            <IonIcon aria-hidden="true" icon={bookmarksOutline} />
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/cart">
-            <IonIcon aria-hidden="true" icon={bagOutline} />
-          </IonTabButton>
-          <IonTabButton tab="tab4" href="/profile">
-            <IonIcon aria-hidden="true" icon={personOutline} />
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+  <Provider store={store}>
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/home">
+              <Home />
+            </Route>
+            <Route exact path="/favorites">
+              <Favorites />
+            </Route>
+            <Route exact path="/cart">
+              <Cart />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="tab1" href="/home">
+              <IonIcon aria-hidden="true" icon={homeOutline} />
+            </IonTabButton>
+            <IonTabButton tab="tab2" href="/favorites">
+              <IonIcon aria-hidden="true" icon={bookmarksOutline} />
+            </IonTabButton>
+            <IonTabButton tab="tab3" href="/cart">
+              <IonIcon aria-hidden="true" icon={bagOutline} />
+              <IonBadge>0</IonBadge>
+            </IonTabButton>
+            <IonTabButton tab="tab4" href="/profile">
+              <IonIcon aria-hidden="true" icon={personOutline} />
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  </Provider>
+)
 
 export default App;
